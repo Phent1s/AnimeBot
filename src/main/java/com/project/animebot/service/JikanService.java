@@ -18,7 +18,6 @@ public class JikanService {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    // Поиск аниме
     public Anime searchAnime(String query) {
         try {
             String encodedQuery = URLEncoder.encode(query, StandardCharsets.UTF_8.toString());
@@ -34,7 +33,6 @@ public class JikanService {
         return null;
     }
 
-    // Поиск манги
     public Manga searchManga(String query) {
         try {
             String encodedQuery = URLEncoder.encode(query, StandardCharsets.UTF_8.toString());
@@ -50,7 +48,6 @@ public class JikanService {
         return null;
     }
 
-    // Поиск персонажа
     public Character searchCharacter(String query) {
         try {
             String encodedQuery = URLEncoder.encode(query, StandardCharsets.UTF_8.toString());
@@ -66,7 +63,6 @@ public class JikanService {
         return null;
     }
 
-    // Получение топовых аниме
     public List<Anime> getTopAnime(String type, String filter, String rating, boolean sfw, int page, int limit) {
         try {
             String url = jikanApiUrl + "/top/anime?type=" + type + "&filter=" + filter + "&rating=" + rating + "&sfw=" + sfw + "&page=" + page + "&limit=" + limit;
@@ -81,7 +77,6 @@ public class JikanService {
         return null;
     }
 
-    // Получение топовой манги
     public List<Manga> getTopManga(String type, String filter, int page, int limit) {
         try {
             String url = jikanApiUrl + "/top/manga?type=" + type + "&filter=" + filter + "&page=" + page + "&limit=" + limit;
@@ -96,7 +91,6 @@ public class JikanService {
         return null;
     }
 
-    // Получение топовых персонажей
     public List<Character> getTopCharacters(int page, int limit) {
         try {
             String url = jikanApiUrl + "/top/characters?page=" + page + "&limit=" + limit;
@@ -111,7 +105,6 @@ public class JikanService {
         return null;
     }
 
-    // Получение случайного аниме
     public Anime getRandomAnime() {
         try {
             String url = jikanApiUrl + "/random/anime";
@@ -123,7 +116,6 @@ public class JikanService {
         return null;
     }
 
-    // Получение случайной манги
     public Manga getRandomManga() {
         try {
             String url = jikanApiUrl + "/random/manga";
@@ -135,7 +127,6 @@ public class JikanService {
         return null;
     }
 
-    // Получение случайного персонажа
     public Character getRandomCharacter() {
         try {
             String url = jikanApiUrl + "/random/characters";
@@ -147,7 +138,6 @@ public class JikanService {
         return null;
     }
 
-    // Внутренние классы для парсинга ответов
     private static class AnimeResponse {
         private List<Anime> data;
 

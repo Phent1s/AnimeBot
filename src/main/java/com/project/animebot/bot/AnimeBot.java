@@ -27,7 +27,6 @@ public class AnimeBot extends TelegramLongPollingBot {
     @Value("${telegram.bot.username}")
     private String botUsername;
 
-    // Состояния пользователя
     private enum UserState {
         MAIN_MENU,
         SEARCH_CATEGORY,
@@ -112,7 +111,6 @@ public class AnimeBot extends TelegramLongPollingBot {
         }
     }
 
-    // Обработка главного меню
     private void handleMainMenu(long chatId, String text) {
         if (text.equals("/start") || text.equals("Главное меню")) {
             showMainMenu(chatId);
@@ -130,7 +128,6 @@ public class AnimeBot extends TelegramLongPollingBot {
         }
     }
 
-    // Обработка выбора категории поиска
     private void handleSearchCategory(long chatId, String text) {
         if (text.equals("Аниме") || text.equals("Манга") || text.equals("Персонаж")) {
             currentCategory = text;
@@ -144,7 +141,6 @@ public class AnimeBot extends TelegramLongPollingBot {
         }
     }
 
-    // Обработка поискового запроса
     private void handleSearchQuery(long chatId, String text) {
         switch (currentCategory) {
             case "Аниме":
@@ -176,7 +172,6 @@ public class AnimeBot extends TelegramLongPollingBot {
         showMainMenu(chatId);
     }
 
-    // Обработка выбора категории для топа
     private void handleTopCategory(long chatId, String text) {
         if (text.equals("Аниме") || text.equals("Манга") || text.equals("Персонаж")) {
             currentTopCategory = text;
@@ -202,35 +197,30 @@ public class AnimeBot extends TelegramLongPollingBot {
         }
     }
 
-    // Обработка типа для топовых аниме
     private void handleTopAnimeType(long chatId, String text) {
         currentType = text;
         currentState = UserState.TOP_ANIME_FILTER;
         showTopAnimeFilterMenu(chatId);
     }
 
-    // Обработка фильтра для топовых аниме
     private void handleTopAnimeFilter(long chatId, String text) {
         currentFilter = text;
         currentState = UserState.TOP_ANIME_RATING;
         showTopAnimeRatingMenu(chatId);
     }
 
-    // Обработка рейтинга для топовых аниме
     private void handleTopAnimeRating(long chatId, String text) {
         currentRating = text;
         currentState = UserState.TOP_ANIME_SFW;
         showTopAnimeSfwMenu(chatId);
     }
 
-    // Обработка SFW для топовых аниме
     private void handleTopAnimeSfw(long chatId, String text) {
         currentSfw = text.equalsIgnoreCase("Да");
         currentState = UserState.TOP_ANIME_LIMIT;
         sendMessage(chatId, "Введите количество аниме (например, 10):");
     }
 
-    // Обработка лимита для топовых аниме
     private void handleTopAnimeLimit(long chatId, String text) {
         try {
             currentLimit = Integer.parseInt(text);
@@ -252,21 +242,18 @@ public class AnimeBot extends TelegramLongPollingBot {
         showMainMenu(chatId);
     }
 
-    // Обработка типа для топовой манги
     private void handleTopMangaType(long chatId, String text) {
         currentType = text;
         currentState = UserState.TOP_MANGA_FILTER;
         showTopMangaFilterMenu(chatId);
     }
 
-    // Обработка фильтра для топовой манги
     private void handleTopMangaFilter(long chatId, String text) {
         currentFilter = text;
         currentState = UserState.TOP_MANGA_LIMIT;
         sendMessage(chatId, "Введите количество манги (например, 10):");
     }
 
-    // Обработка лимита для топовой манги
     private void handleTopMangaLimit(long chatId, String text) {
         try {
             currentLimit = Integer.parseInt(text);
@@ -288,7 +275,6 @@ public class AnimeBot extends TelegramLongPollingBot {
         showMainMenu(chatId);
     }
 
-    // Обработка лимита для топовых персонажей
     private void handleTopCharactersLimit(long chatId, String text) {
         try {
             currentLimit = Integer.parseInt(text);
@@ -310,7 +296,6 @@ public class AnimeBot extends TelegramLongPollingBot {
         showMainMenu(chatId);
     }
 
-    // Обработка выбора категории для случайного
     private void handleRandomCategory(long chatId, String text) {
         if (text.equals("Аниме") || text.equals("Манга") || text.equals("Персонаж")) {
             switch (text) {
@@ -349,7 +334,6 @@ public class AnimeBot extends TelegramLongPollingBot {
         }
     }
 
-    // Форматирование ответа для аниме
     private String formatAnimeResponse(Anime anime) {
         return String.format(
                 "🎬 *Название:* %s\n" +
@@ -370,7 +354,6 @@ public class AnimeBot extends TelegramLongPollingBot {
         );
     }
 
-    // Форматирование ответа для манги
     private String formatMangaResponse(Manga manga) {
         return String.format(
                 "📚 *Название:* %s\n" +
@@ -391,7 +374,6 @@ public class AnimeBot extends TelegramLongPollingBot {
         );
     }
 
-    // Форматирование ответа для персонажа
     private String formatCharacterResponse(Character character) {
         return String.format(
                 "👤 *Имя:* %s\n" +
@@ -404,7 +386,6 @@ public class AnimeBot extends TelegramLongPollingBot {
         );
     }
 
-    // Показ главного меню
     private void showMainMenu(long chatId) {
         SendMessage message = new SendMessage();
         message.setChatId(String.valueOf(chatId));
@@ -429,7 +410,6 @@ public class AnimeBot extends TelegramLongPollingBot {
         }
     }
 
-    // Показ меню выбора категории
     private void showSearchCategoryMenu(long chatId) {
         SendMessage message = new SendMessage();
         message.setChatId(String.valueOf(chatId));
@@ -458,7 +438,6 @@ public class AnimeBot extends TelegramLongPollingBot {
         }
     }
 
-    // Показ меню выбора категории для топа
     private void showTopCategoryMenu(long chatId) {
         SendMessage message = new SendMessage();
         message.setChatId(String.valueOf(chatId));
@@ -487,7 +466,6 @@ public class AnimeBot extends TelegramLongPollingBot {
         }
     }
 
-    // Показ меню выбора типа для топовых аниме
     private void showTopAnimeTypeMenu(long chatId) {
         SendMessage message = new SendMessage();
         message.setChatId(String.valueOf(chatId));
@@ -528,7 +506,6 @@ public class AnimeBot extends TelegramLongPollingBot {
         }
     }
 
-    // Показ меню выбора фильтра для топовых аниме
     private void showTopAnimeFilterMenu(long chatId) {
         SendMessage message = new SendMessage();
         message.setChatId(String.valueOf(chatId));
@@ -558,7 +535,6 @@ public class AnimeBot extends TelegramLongPollingBot {
         }
     }
 
-    // Показ меню выбора рейтинга для топовых аниме
     private void showTopAnimeRatingMenu(long chatId) {
         SendMessage message = new SendMessage();
         message.setChatId(String.valueOf(chatId));
@@ -593,7 +569,6 @@ public class AnimeBot extends TelegramLongPollingBot {
         }
     }
 
-    // Показ меню выбора SFW для топовых аниме
     private void showTopAnimeSfwMenu(long chatId) {
         SendMessage message = new SendMessage();
         message.setChatId(String.valueOf(chatId));
@@ -621,7 +596,6 @@ public class AnimeBot extends TelegramLongPollingBot {
         }
     }
 
-    // Показ меню выбора типа для топовой манги
     private void showTopMangaTypeMenu(long chatId) {
         SendMessage message = new SendMessage();
         message.setChatId(String.valueOf(chatId));
@@ -657,7 +631,6 @@ public class AnimeBot extends TelegramLongPollingBot {
         }
     }
 
-    // Показ меню выбора фильтра для топовой манги
     private void showTopMangaFilterMenu(long chatId) {
         SendMessage message = new SendMessage();
         message.setChatId(String.valueOf(chatId));
@@ -687,7 +660,6 @@ public class AnimeBot extends TelegramLongPollingBot {
         }
     }
 
-    // Показ меню выбора категории для случайного
     private void showRandomCategoryMenu(long chatId) {
         SendMessage message = new SendMessage();
         message.setChatId(String.valueOf(chatId));
@@ -716,7 +688,6 @@ public class AnimeBot extends TelegramLongPollingBot {
         }
     }
 
-    // Отправка сообщения
     private void sendMessage(long chatId, String text) {
         SendMessage message = new SendMessage();
         message.setChatId(String.valueOf(chatId));

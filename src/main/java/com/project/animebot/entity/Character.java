@@ -38,7 +38,6 @@ public class Character {
     @JsonProperty("voice_actors")
     private List<VoiceActor> voiceActors;
 
-    // Геттеры и сеттеры
     public int getMalId() { return malId; }
     public void setMalId(int malId) { this.malId = malId; }
 
@@ -72,7 +71,6 @@ public class Character {
     public List<VoiceActor> getVoiceActors() { return voiceActors; }
     public void setVoiceActors(List<VoiceActor> voiceActors) { this.voiceActors = voiceActors; }
 
-    // Вложенные классы
     public static class Images {
         @JsonProperty("jpg")
         private ImageUrls jpg;

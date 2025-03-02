@@ -92,7 +92,6 @@ public class Anime {
     @JsonProperty("demographics")
     private List<Demographic> demographics;
 
-    // Геттеры и сеттеры
     public int getMalId() { return malId; }
     public void setMalId(int malId) { this.malId = malId; }
 
@@ -180,7 +179,6 @@ public class Anime {
     public List<Demographic> getDemographics() { return demographics; }
     public void setDemographics(List<Demographic> demographics) { this.demographics = demographics; }
 
-    // Вложенные классы
     public static class Images {
         @JsonProperty("jpg")
         private ImageUrls jpg;
