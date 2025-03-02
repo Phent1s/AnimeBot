@@ -121,8 +121,8 @@ public class AnimeBot extends TelegramLongPollingBot {
             currentState = UserState.TOP_CATEGORY;
             showTopCategoryMenu(chatId);
         } else if (text.equals("Случайное")) {
-            currentState = UserState.RANDOM_CATEGORY;
-            showRandomCategoryMenu(chatId);
+            // Временное сообщение
+            sendMessage(chatId, "Функция в разработке. Следите за обновлениями!");
         } else {
             sendMessage(chatId, "Используйте кнопки для навигации.");
         }
