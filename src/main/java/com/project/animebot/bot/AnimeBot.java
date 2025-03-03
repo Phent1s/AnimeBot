@@ -337,7 +337,7 @@ public class AnimeBot extends TelegramLongPollingBot {
     private String formatAnimeResponse(Anime anime) {
         return String.format(
                 "🎬 *Название:* %s\n" +
-                "🌐 *Английское название:* %s\n" +
+                "🌐 *Альтернативное название:* %s\n" +
                 "📺 *Тип:* %s\n" +
                 "📊 *Эпизоды:* %d\n" +
                 "⭐ *Рейтинг:* %.2f\n" +
